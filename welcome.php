@@ -104,22 +104,22 @@ if (!isset($_SESSION['username'])){
             <img src="images/book-img.svg" alt="">
         </div>
 
-        <form action="">
+        <form action="book.php" method="post">
             <div class="inputBox">
                 <h3>where to</h3>
-                <input type="text" placeholder="place name">
+                <input type="text" name="place" placeholder="place name">
             </div>
             <div class="inputBox">
                 <h3>how many</h3>
-                <input type="number" placeholder="number of guests">
+                <input type="number" name="guest_no" placeholder="number of guests">
             </div>
             <div class="inputBox">
                 <h3>arrivals</h3>
-                <input type="date">
+                <input type="date" name="arrival_date">
             </div>
             <div class="inputBox">
                 <h3>leaving</h3>
-                <input type="date">
+                <input type="date" name="leaving_date">
             </div>
             <input type="submit" class="btn" value="book now">
         </form>
@@ -524,11 +524,15 @@ if (!isset($_SESSION['username'])){
                     Email.send({
                     SecureToken : "42d86124-2fee-44fe-86ba-87db37f002cd",
                     To : 'pendoc15@gmail.com',
-                    From : email.value,
+                    From : document.getElementById("email").value
                     Subject : "Contact Form",
-                    Body : "message.value"
+                    Body : "Name: " + document.getElementById("name").value
+                           + "<br> Email: " + document.getElementById("email").value
+                           + "<br> Phone no: " + document.getElementById("number").value
+                           + "<br> Subject: " + document.getElementById("subject").value
+                           + "<br> Message: " + document.getElementById("message").value
                 }).then(
-                message => alert(message)
+                message => alert(message sent successfully)
                 );
                 }
 
