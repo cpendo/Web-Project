@@ -491,7 +491,7 @@ if (!isset($_SESSION['username'])){
             <img src="images/contact-img.svg" alt="">
         </div>
 
-        <form action="contact.php" id="contact-form" method="POST">
+        <form id="contact-form" method="POST">
             <div class="inputBox">
                 <input type="text" placeholder="name" name="name" required>
                 <input type="email" placeholder="email" name="email" required>
