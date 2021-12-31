@@ -104,22 +104,22 @@ if (!isset($_SESSION['username'])){
             <img src="images/book-img.svg" alt="">
         </div>
 
-        <form action="">
+        <form action="book.php" method="post">
             <div class="inputBox">
                 <h3>where to</h3>
-                <input type="text" placeholder="place name">
+                <input type="text" name="place" placeholder="place name">
             </div>
             <div class="inputBox">
                 <h3>how many</h3>
-                <input type="number" placeholder="number of guests">
+                <input type="number" name="guest_no" placeholder="number of guests">
             </div>
             <div class="inputBox">
                 <h3>arrivals</h3>
-                <input type="date">
+                <input type="date" name="arrival_date">
             </div>
             <div class="inputBox">
                 <h3>leaving</h3>
-                <input type="date">
+                <input type="date" name="leaving_date">
             </div>
             <input type="submit" class="btn" value="book now">
         </form>
@@ -491,17 +491,59 @@ if (!isset($_SESSION['username'])){
             <img src="images/contact-img.svg" alt="">
         </div>
 
-        <form id="contact-form" method="POST">
+        <form class="contact-form">
             <div class="inputBox">
-                <input type="text" placeholder="name" name="name" required>
-                <input type="email" placeholder="email" name="email" required>
+                <input type="text" placeholder="name" class="name" required>
+                <input type="email" placeholder="email" class="email" required>
             </div>
             <div class="inputBox">
-                <input type="number" placeholder="number" name="number" >
-                <input type="text" placeholder="subject" name="subject" required>
+                <input type="number" placeholder="number" class="number" >
+                <input type="text" placeholder="subject" class="subject" required>
             </div>
-            <textarea placeholder="message" name="message" id="" cols="30" rows="10" required></textarea>
+            <textarea placeholder="message" class="message" id="" cols="30" rows="10" required></textarea>
             <input type="submit" class="btn" value="send message">
+
+         <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+         <script>
+           
+
+                //function to send email on click
+
+                const form = document.querySelector('.contact-form');
+
+                function sendMsg(e) {
+                    e.preventDefault();
+                 const  name = document.querySelector('.name'),
+                        email = document.querySelector('.email'),
+                        number = document.querySelector('.number'),
+                        subject = document.querySelector('.subject'),
+                        message = document.querySelector('.message');
+                  
+
+                    Email.send({
+                    SecureToken : "42d86124-2fee-44fe-86ba-87db37f002cd",
+                    To : 'pendoc15@gmail.com',
+                    From : document.getElementById("email").value
+                    Subject : "Contact Form",
+                    Body : "Name: " + document.getElementById("name").value
+                           + "<br> Email: " + document.getElementById("email").value
+                           + "<br> Phone no: " + document.getElementById("number").value
+                           + "<br> Subject: " + document.getElementById("subject").value
+                           + "<br> Message: " + document.getElementById("message").value
+                }).then(
+                message => alert(message sent successfully)
+                );
+                }
+
+//event listener
+form.addEventListener('submit', sendMsg)
+
+
+         </script>
+
+
+
         </form>
 
     </div>
